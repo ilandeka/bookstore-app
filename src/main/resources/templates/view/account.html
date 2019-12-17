@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head th:replace="fragments/main::head">
+<title>Bookstore App</title>
+</head>
+<body class="profile-page sidebar-collapse">
+	<div th:replace="fragments/header::header"></div>
+	<div class="page-header clear-filter" filter-color="orange">
+		<div class="page-header-image" data-parallax="true"></div>
+		<div class="container">
+			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
+			<h1 class="h1-seo">Bookstore App</h1>
+			<h3>
+				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
+			</h3>
+		</div>
+	</div>
+	<div class="wrapper container">
+		<div class="section">
+			<div class="section-headline">
+				<h3>
+					<span>User Account</span>
+				</h3>
+			</div>
+			<hr class="hr-center" />
+		</div>
+		<div class="section-settings">
+			<div class="card">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="card-header">
+							<ul class="nav nav-tabs nav-tabs-primary flex-column"
+								role="tablist">
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#home" role="tab"> <i class="fas fa-home"></i> Home
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#create" role="tab"
+									th:classappend="${classActiveNewAccount}? 'active'"> <i
+										class="fas fa-plus-circle"></i> Create Account
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#login" role="tab"
+									th:classappend="${classActiveLogin}? 'active'"> <i
+										class="fas fa-sign-in-alt"></i> Login
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#forgot" role="tab"
+									th:classappend="${classActiveForgotPassword}? 'active'"> <i
+										class="fas fa-question-circle"></i> Forgot Password
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="card-body">
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane" id="home" role="tabpanel">
+									<div class="text-center">
+										<h2 class="title">User Account</h2>
+										<h5 class="description">Here you can create a new Account
+											by clicking on the Create Account tab or Login by clicking on
+											the Login tab. If you ever forget your username or password
+											you can click on the Forgot Password tab and type in your
+											Email address to reset your Account details.</h5>
+									</div>
+								</div>
+								<div class="tab-pane" id="create" role="tabpanel"
+									th:classappend="${classActiveNewAccount}? 'in active'">
+									<form th:action="@{/newUser}" method="post">
+										<div class="alert alert-info" role="alert"
+											th:if="${emailSent}">
+											<div class="alert-icon">
+												<i class="now-ui-icons ui-2_like"></i>
+											</div>
+											<strong>Well done!</strong> An email has been sent to the
+											email address. Please, validate your email address!
+											<button type="button" class="close" data-dismiss="alert"
+												aria-label="Close">
+												<span aria-hidden="true"> <i
+													class="now-ui-icons ui-1_simple-remove"></i>
+												</span>
+											</button>
+										</div>
+										<div class="form-group">
+											<div th:if="${usernameExists}" class="alert alert-danger"
+												role="alert">Username already exists please, choose a
+												different one!</div>
+											<label for="newUsername">Username</label> <input type="text"
+												class="form-control" id="newUsername" name="username"
+												aria-describedby="usernameHelp" placeholder="Username"
+												required="required" /> <small id="usernameHelp"
+												class="form-text text-muted">Enter username here.</small>
+										</div>
+										<div class="form-group">
+											<div th:if="${emailExists}" class="alert alert-danger"
+												role="alert">Email already exists please, choose a
+												different one!</div>
+											<label for="email">Email Address</label><input type="email"
+												class="form-control" id="email" name="email"
+												aria-describedby="emailHelp" placeholder="Enter email"
+												required="required" /> <small id="emailHelp"
+												class="form-text text-muted">Enter a valid email
+												address. All emails from system will be sent to this
+												address. The email address is not made public and will only
+												be used if you wish to receive a new password or if you wish
+												to receive certain notifications.</small>
+										</div>
+										<button type="submit" class="btn btn-primary">Create
+											Account</button>
+									</form>
+								</div>
+								<div class="tab-pane" id="login" role="tabpanel"
+									th:classappend="${classActiveLogin}? 'in active'">
+									<div th:if="${param.error != null}" class="alert alert-danger"
+										role="alert">Incorrect Username or Password.</div>
+									<form th:action="@{/login}" method="post">
+										<div class="form-group">
+											<label for="username">Username</label> <input type="text"
+												class="form-control" id="username" name="username"
+												aria-describedby="usernameHelp" placeholder="Username"
+												required="required" /> <small id="usernameHelp"
+												class="form-text text-muted">Enter username here.</small>
+										</div>
+										<div class="form-group">
+											<label for="password">Password</label> <input type="password"
+												class="form-control" id="password" name="password"
+												aria-describedby="passwordHelp" placeholder="Password"
+												required="required" /> <small id="passwordHelp"
+												class="form-text text-muted">Enter password here.</small>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="checkbox" /> <span
+												class="form-check-sign"></span> Remember Me
+											</label>
+										</div>
+										<button type="submit" class="btn btn-primary">Login</button>
+									</form>
+								</div>
+								<div class="tab-pane" id="forgot" role="tabpanel"
+									th:classappend="${classActiveForgotPassword}? 'in active'">
+									<div th:if="${emailNotExist}" class="alert alert-danger"
+										role="alert">Email doesn't exist!</div>
+									<div th:if="${forgotPasswordEmailSent}"
+										class="alert alert-success" role="alert">Email sent.</div>
+									<form th:action="@{/forgotPassword}" method="post">
+										<div class="form-group">
+											<label for="recoverEmail">Email Address</label> <input
+												type="email" class="form-control" id="recoverEmail"
+												name="email" aria-describedby="recoverEmailHelp"
+												placeholder="Enter email" required="required" /> <small
+												id="recoverEmailHelp" class="form-text text-muted">Enter
+												your users Email address.</small>
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/main::scripts"></div>
+</body>
+</html>

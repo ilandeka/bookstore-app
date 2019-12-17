@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head th:replace="fragments/main::head">
+<title>Bookstore App</title>
+</head>
+<body class="profile-page sidebar-collapse">
+	<div th:replace="fragments/header::header"></div>
+	<div class="page-header clear-filter" filter-color="orange">
+		<div class="page-header-image" data-parallax="true"></div>
+		<div class="container">
+			<div class="photo-container">
+				<img src="/img/ryan.jpg" alt="" />
+			</div>
+			<h3 class="title" th:text="${user.username}"></h3>
+			<p class="category" th:text="${user.email}"></p>
+			<div class="content">
+				<div class="social-description">
+					<h2>26</h2>
+					<p>Books</p>
+				</div>
+				<div class="social-description">
+					<h2>26</h2>
+					<p>Comments</p>
+				</div>
+				<div class="social-description">
+					<h2>48</h2>
+					<p>Bookmarks</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper container">
+		<div class="section">
+			<div class="section-headline">
+				<h3>
+					<span th:text="${#strings.toUpperCase(user.username)}"></span>
+				</h3>
+			</div>
+			<hr class="hr-center" />
+		</div>
+		<div class="section-settings">
+			<div class="card">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="card-header">
+							<ul class="nav nav-tabs nav-tabs-primary flex-column"
+								role="tablist">
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#edit" role="tab"
+									th:classappend="${classActiveEdit}? 'active'"> <i
+										class="fas fa-edit"></i> Edit
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#orders" role="tab"
+									th:classappend="${classActiveOrder}? 'active'"> <i
+										class="fas fa-list-ul"></i> Orders
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#billing" role="tab"
+									th:classappend="${classActiveBilling}? 'active'"> <i
+										class="fas fa-credit-card"></i> Billing
+								</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#shipping" role="tab"
+									th:classappend="${classActiveShipping}? 'active'"> <i
+										class="fas fa-truck"></i> Shipping
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="card-body">
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane" id="edit" role="tabpanel"
+									th:classappend="${classActiveEdit}? 'in active'">
+									<form th:action="@{/updateUserInfo}" method="post">
+										<input type="hidden" name="id" th:value="${user.id}" />
+										<div class="bg-info" th:if="${updateUserInfo}">User info
+											updated</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6">
+													<label for="firstName">First Name</label> <input
+														type="text" class="form-control" id="firstName"
+														name="firstName" aria-describedby="firstNameHelp"
+														placeholder="First Name" th:value="${user.firstName}" />
+													<small id="firstNameHelp" class="form-text text-muted">Input
+														First Name here.</small>
+												</div>
+												<div class="col-sm-6">
+													<label for="lastName">Last Name</label> <input type="text"
+														class="form-control" id="lastName" name="lastName"
+														aria-describedby="lastNameHelp" placeholder="Last Name"
+														th:value="${user.lastName}" /> <small id="lastNameHelp"
+														class="form-text text-muted">Input Last Name here.</small>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="userName">Username</label> <input type="text"
+												class="form-control" id="userName" name="username"
+												aria-describedby="userNameHelp" placeholder="Username"
+												th:value="${user.username}" /> <small id="userNameHelp"
+												class="form-text text-muted">Input Username here.</small>
+										</div>
+										<div class="form-group">
+											<label for="currentPassword">Current Password</label> <input
+												type="password" class="form-control" id="currentPassword"
+												name="currentPassword"
+												aria-describedby="currentPasswordHelp"
+												placeholder="Current Password" th:value="${currentPassword}" />
+											<small id="currentPasswordHelp" class="form-text text-muted">Enter
+												your Current Password here to change the email address or
+												password.</small>
+										</div>
+										<div class="form-group">
+											<label for="newPassword">New Password</label> <input
+												type="password" class="form-control" id="newPassword"
+												name="newPassword" placeholder="New Password" />
+										</div>
+										<div class="form-group">
+											<label for="confirmPassword">Confirm Password</label> <input
+												type="password" class="form-control" id="confirmPassword"
+												placeholder="Confirm Password" />
+										</div>
+										<div class="form-group">
+											<label for="email">Email</label> <input type="text"
+												class="form-control" id="email" name="email"
+												aria-describedby="emailHelp" placeholder="Email"
+												th:value="${user.email}" required="required" /> <small
+												id="emailHelp" class="form-text text-muted">Enter
+												your Email address (required).</small>
+										</div>
+										<button type="submit" class="btn btn-primary">Create
+											Account</button>
+									</form>
+								</div>
+								<div class="tab-pane" id="orders" role="tabpanel"
+									th:classappend="${classActiveOrder}? 'in active'">
+									<form>
+										<div class="form-group">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item active">
+													<a th:href="@{/listOfCreditCard}" th:style="${listOfCreditCards} ? 'color:red'">List of Credit Cards</a>
+												</li>
+												<li class="breadcrumb-item active">
+													<a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard} ? 'color:red'">Add(Update) Credit Card</a>
+												</li>
+											</ol>
+											<div th:if="${listOfCreditCards}">
+												<form th:action="@{/setDefaultPayment}" method="post">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>Default</th>
+																<th>Credit Card</th>
+																<th>Operations</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="userPayment : ${userPaymentList}">
+																<td>
+																	<input type="radio" name="defaultUserPaymentId" th:value="${userPayment.id}" th:checked="${userPayment.defaultPayment}" />
+																</td>
+																<td th:text="${userPayment.cardName}"></td>
+																<td>
+																	<a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a>
+																	<a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<button class="btn btn-primary" type="submit">Save</button>
+												</form>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="tab-pane" id="billing" role="tabpanel"
+									th:classappend="${classActiveBilling}? 'in active'">
+									<form>
+										<div class="form-group">
+											<label for="username">Username</label> <input type="text"
+												class="form-control" id="usernameLogin" name="username"
+												aria-describedby="usernameHelp" placeholder="Username"
+												required="required" /> <small id="usernameHelp"
+												class="form-text text-muted">Enter username here.</small>
+										</div>
+										<div class="form-group">
+											<label for="password">Password</label> <input type="password"
+												class="form-control" id="password" name="password"
+												aria-describedby="passwordHelp" placeholder="Password"
+												required="required" /> <small id="passwordHelp"
+												class="form-text text-muted">Enter password here.</small>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="checkbox" /> <span
+												class="form-check-sign"></span> Remember Me
+											</label>
+										</div>
+										<button type="submit" class="btn btn-primary">Login</button>
+									</form>
+								</div>
+								<div class="tab-pane" id="shipping" role="tabpanel"
+									th:classappend="${classActiveShipping}? 'in active'">
+									<form>
+										<div class="form-group">
+											<label for="recoverEmail">Email Address</label> <input
+												type="email" class="form-control" id="recoverEmail"
+												name="email" aria-describedby="recoverEmailHelp"
+												placeholder="Enter email" required="required" /> <small
+												id="recoverEmailHelp" class="form-text text-muted">Enter
+												your users Email address.</small>
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/main::scripts"></div>
+</body>
+</html>

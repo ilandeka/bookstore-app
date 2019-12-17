@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<footer class="footer" th:fragment="footer" data-background-color="black">
+	<div class="container">
+		<nav>
+			<ul>
+				<li><a th:href="@{/}"> Home </a></li>
+				<li><a th:href="@{/login}"> Login </a></li>
+				<li><a th:href="@{/books}"> Books </a></li>
+			</ul>
+		</nav>
+		<div class="copyright" id="copyright">
+			&copy;
+			<script>
+				document.getElementById('copyright').appendChild(
+						document.createTextNode(new Date().getFullYear()))
+			</script>
+			, Created by <a href="https://github.com/ilandeka" target="_blank">Ivan
+				Landeka</a>.
+		</div>
+	</div>
+</footer>
+</html>
