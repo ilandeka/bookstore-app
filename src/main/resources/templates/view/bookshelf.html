@@ -22,7 +22,7 @@
 		<div class="section">
 			<div class="section-headline">
 				<h3>
-					<span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Books'"></span>
+					<span th:text="${user} ? ${#strings.toUpperCase(user.username)} : 'All Books'"></span>
 				</h3>
 			</div>
 			<hr class="hr-center" />

@@ -96,6 +96,11 @@
 	min-height: 400px;
 }
 
+.vl {
+  /* vertical line */
+  border-left: 2px solid white;
+}
+
 /* IDs */
 #sale-books .carousel-item img {
 	width: 100%;
