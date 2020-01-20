@@ -16,29 +16,28 @@ import com.bookstore.utility.SecurityUtility;
 
 @SpringBootApplication
 public class BookstoreApplication implements CommandLineRunner {
-	
-	@Autowired
-	private UserService userService;
-	
-	public static void main(String[] args) {
-		SpringApplication.run(BookstoreApplication.class, args);
-	}
-	
-	@Override
-	public void run(String... args) throws Exception {
-		User user1 = new User();
-		user1.setFirstName("john");
-		user1.setLastName("doe");
-		user1.setUsername("jd");
-		user1.setPassword(SecurityUtility.passwordEncoder().encode("p"));
-		user1.setEmail("johndoe@gmail.com");
-		Set<UserRole> userRoles = new HashSet<>();
-		Role role1 = new Role();
-		role1.setRoleId(1);
-		role1.setName("ROLE_USER");
-		userRoles.add(new UserRole(user1, role1));
-		
-		userService.createUser(user1, userRoles);
-	}
-}
 
+  @Autowired
+  private UserService userService;
+
+  public static void main(String[] args) {
+    SpringApplication.run(BookstoreApplication.class, args);
+  }
+
+  @Override
+  public void run(String... args) throws Exception {
+    User user1 = new User();
+    user1.setFirstName("john");
+    user1.setLastName("doe");
+    user1.setUsername("jd");
+    user1.setPassword(SecurityUtility.passwordEncoder().encode("p"));
+    user1.setEmail("johndoe@gmail.com");
+    Set<UserRole> userRoles = new HashSet<>();
+    Role role1 = new Role();
+    role1.setRoleId(1);
+    role1.setName("ROLE_USER");
+    userRoles.add(new UserRole(user1, role1));
+
+    userService.createUser(user1, userRoles);
+  }
+}

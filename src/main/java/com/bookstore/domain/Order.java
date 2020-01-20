@@ -33,7 +33,7 @@ public class Order {
   @OneToOne(cascade = CascadeType.ALL)
   private ShippingAddress shippingAddress;
 
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private Payment payment;
 
   @ManyToOne

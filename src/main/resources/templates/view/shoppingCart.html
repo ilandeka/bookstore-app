@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="en">
+<head th:replace="fragments/main::head">
+<title>Bookstore App</title>
+</head>
+<body class="profile-page sidebar-collapse">
+	<div th:replace="fragments/header::header"></div>
+	<div class="page-header clear-filter" filter-color="orange">
+		<div class="page-header-image" data-parallax="true"></div>
+		<div class="container">
+			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
+			<h1 class="h1-seo">Bookstore App</h1>
+			<h3>
+				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
+			</h3>
+		</div>
+	</div>
+	<div class="wrapper container">
+		<div class="section">
+			<div class="section-headline">
+				<h3>
+					<span>Shopping Cart</span>
+				</h3>
+			</div>
+			<hr class="hr-center" />
+		</div>
+		<div class="section-shoppingCart">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-6 text-left">
+							<a class="btn btn-primary" th:href="@{/bookshelf}">Continue Shopping</a>
+						</div>
+						<div class="col-sm-6 text-right">
+							<a class="btn btn-primary" th:href="@{/checkout(id=${shoppingCart.id})}">Check Out</a>
+						</div>
+					</div>
+						<div th:if="${notEnoughStock}" class="alert alert-warning">
+							Oops, some of the products don't have enough stock. Please, update product quantity.
+						</div>
+						<div th:if="${emptyCart}" class="alert alert-warning">
+							Oops, your cart is empty. See if you can find what you want in the bookshelf and add them to cart.
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-sm-8"><h4>Products</h4></div>
+							<div class="col-sm-2"><h4>Price</h4></div>
+							<div class="col-sm-2"><h4>Qty</h4></div>
+						</div>
+						<!-- Display products in cart -->
+						<div th:each="cartItem : ${cartItemList}">
+							<form th:action="@{/shoppingCart/updateCartItem}" method="post">
+								<hr/>
+								<div class="row">
+									<div class="col-sm-8">
+										<a th:href="@{/bookDetail(id=${cartItem.id})}">
+											<img th:if="${cartItem.book.imageType == '.jpg'}" class="img-responsive shelf-book cart-item-book" th:src="#{adminPath} + @{/img/book/} + 'default.jpg'" />
+											<img th:if="${cartItem.book.imageType == '.png'}" class="img-responsive shelf-book cart-item-book" th:src="#{adminPath} + @{/img/book/} + ${cartItem.book.id} + '.png'" /> 
+										</a>
+										<p th:if="${cartItem.book.inStockNumber &gt; 10}" style="color:green;">In Stock</p>
+										<p th:if="${cartItem.book.inStockNumber &lt; 10 and cartItem.book.inStockNumber &gt; 0}" style="color:green;">Only
+										<span th:text="${cartItem.book.inStockNumber}"> In Stock</span></p>
+										<p th:if="${cartItem.book.inStockNumber == 0}" style="color:red;">Product Unavailable</p>
+									</div>
+									<div class="col-sm-2">
+										<h5 style="color:#db3208;font-size:large;">$<span th:text="${cartItem.book.ourPrice}" th:style="${cartItem.book.inStockNumber} == 0 ? 'text-decoration: line-through' : ''"></span></h5>
+									</div>
+									<div class="col-sm-2">
+										<input hidden="hidden" name="id" th:value="${cartItem.id}" />
+										<input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.book.inStockNumber == 0}" class="form-control cartItemQty" th:value="${cartItem.qty}" />
+										<button style="display:none;" th:id="'update-item-' + ${cartItem.id}" type="submit" class="btn btn-warning btn-sm">Update</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="row">
+							<h4 class="col-sm-12 text-right">
+								<hr class="hr-center" />
+								<strong style="font-size:large;">Total Price (<span th:text="${#lists.size(cartItemList)}"></span> items):</strong>
+								<span style="color:#db3208;font-size:large;">$<span th:text="${shoppingCart.grandTotal}"></span></span>
+							</h4>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/main::scripts"></div>
+</body>
+</html>
