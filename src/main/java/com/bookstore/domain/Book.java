@@ -1,184 +1,193 @@
 package com.bookstore.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Book {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String title;
-	private String author;
-	private String publisher;
-	private String publicationDate;
-	private String language;
-	private String category;
-	private int numberOfPages;
-	private String format;
-	private Long isbn;
-	private double shippingWeight;
-	private double listPrice;
-	private double ourPrice;
-	private boolean active = true;
-	@Column(columnDefinition = "text")
-	private String description;
-	private int inStockNumber;
-	private String imageType;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  private String title;
+  private String author;
+  private String publisher;
+  private String publicationDate;
+  private String language;
+  private String category;
+  private int numberOfPages;
+  private String format;
+  private Long isbn;
+  private double shippingWeight;
+  private double listPrice;
+  private double ourPrice;
+  private boolean active = true;
+  @Column(columnDefinition = "text")
+  private String description;
+  private int inStockNumber;
+  private String imageType;
 
-	// Transient - Won't be stored in Database
-	@Transient
-	private MultipartFile bookImage;
+  // Transient - Won't be stored in Database
+  @Transient
+  private MultipartFile bookImage;
 
-	public Long getId() {
-		return id;
-	}
+  @OneToMany(mappedBy = "book")
+  @JsonIgnore
+  private List<BookToCartItem> bookToCartItem;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public String getAuthor() {
-		return author;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+  public String getAuthor() {
+    return author;
+  }
 
-	public String getPublisher() {
-		return publisher;
-	}
+  public void setAuthor(String author) {
+    this.author = author;
+  }
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
+  public String getPublisher() {
+    return publisher;
+  }
 
-	public String getPublicationDate() {
-		return publicationDate;
-	}
+  public void setPublisher(String publisher) {
+    this.publisher = publisher;
+  }
 
-	public void setPublicationDate(String publicationDate) {
-		this.publicationDate = publicationDate;
-	}
+  public String getPublicationDate() {
+    return publicationDate;
+  }
 
-	public String getLanguage() {
-		return language;
-	}
+  public void setPublicationDate(String publicationDate) {
+    this.publicationDate = publicationDate;
+  }
 
-	public void setLanguage(String language) {
-		this.language = language;
-	}
+  public String getLanguage() {
+    return language;
+  }
 
-	public String getCategory() {
-		return category;
-	}
+  public void setLanguage(String language) {
+    this.language = language;
+  }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+  public String getCategory() {
+    return category;
+  }
 
-	public int getNumberOfPages() {
-		return numberOfPages;
-	}
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
-	public void setNumberOfPages(int numberOfPages) {
-		this.numberOfPages = numberOfPages;
-	}
+  public int getNumberOfPages() {
+    return numberOfPages;
+  }
 
-	public String getFormat() {
-		return format;
-	}
+  public void setNumberOfPages(int numberOfPages) {
+    this.numberOfPages = numberOfPages;
+  }
 
-	public void setFormat(String format) {
-		this.format = format;
-	}
+  public String getFormat() {
+    return format;
+  }
 
-	public Long getIsbn() {
-		return isbn;
-	}
+  public void setFormat(String format) {
+    this.format = format;
+  }
 
-	public void setIsbn(Long isbn) {
-		this.isbn = isbn;
-	}
+  public Long getIsbn() {
+    return isbn;
+  }
 
-	public double getShippingWeight() {
-		return shippingWeight;
-	}
+  public void setIsbn(Long isbn) {
+    this.isbn = isbn;
+  }
 
-	public void setShippingWeight(double shippingWeight) {
-		this.shippingWeight = shippingWeight;
-	}
+  public double getShippingWeight() {
+    return shippingWeight;
+  }
 
-	public double getListPrice() {
-		return listPrice;
-	}
+  public void setShippingWeight(double shippingWeight) {
+    this.shippingWeight = shippingWeight;
+  }
 
-	public void setListPrice(double listPrice) {
-		this.listPrice = listPrice;
-	}
+  public double getListPrice() {
+    return listPrice;
+  }
 
-	public double getOurPrice() {
-		return ourPrice;
-	}
+  public void setListPrice(double listPrice) {
+    this.listPrice = listPrice;
+  }
 
-	public void setOurPrice(double ourPrice) {
-		this.ourPrice = ourPrice;
-	}
+  public double getOurPrice() {
+    return ourPrice;
+  }
 
-	public boolean isActive() {
-		return active;
-	}
+  public void setOurPrice(double ourPrice) {
+    this.ourPrice = ourPrice;
+  }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+  public boolean isActive() {
+    return active;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public int getInStockNumber() {
-		return inStockNumber;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public void setInStockNumber(int inStockNumber) {
-		this.inStockNumber = inStockNumber;
-	}
+  public int getInStockNumber() {
+    return inStockNumber;
+  }
 
-	public MultipartFile getBookImage() {
-		return bookImage;
-	}
+  public void setInStockNumber(int inStockNumber) {
+    this.inStockNumber = inStockNumber;
+  }
 
-	public void setBookImage(MultipartFile bookImage) {
-		this.bookImage = bookImage;
-	}
+  public MultipartFile getBookImage() {
+    return bookImage;
+  }
 
-	public String getImageType() {
-		return imageType;
-	}
+  public void setBookImage(MultipartFile bookImage) {
+    this.bookImage = bookImage;
+  }
 
-	public void setImageType(String imageType) {
-		this.imageType = imageType;
-	}
+  public String getImageType() {
+    return imageType;
+  }
+
+  public void setImageType(String imageType) {
+    this.imageType = imageType;
+  }
 
 }
