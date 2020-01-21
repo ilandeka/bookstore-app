@@ -5,27 +5,17 @@
 <title>Bookstore App</title>
 </head>
 <body class="profile-page sidebar-collapse">
-	<div th:replace="fragments/header::header"></div>
-	<div class="page-header clear-filter" filter-color="orange">
-		<div class="page-header-image" data-parallax="true"></div>
-		<div class="container">
-			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
-			<h1 class="h1-seo">Bookstore App</h1>
-			<h3>
-				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
-			</h3>
-		</div>
-	</div>
+	<div th:replace="fragments/header-dark::header"></div>
 	<div class="wrapper container">
-		<div class="section">
-			<div class="section-headline">
-				<h3>
-					<span>User Account</span>
-				</h3>
+		<div class="section section-account">
+			<div class="section">
+				<div class="section-headline">
+					<h3>
+						<span>User Account</span>
+					</h3>
+				</div>
+				<hr class="hr-center" />
 			</div>
-			<hr class="hr-center" />
-		</div>
-		<div class="section-settings">
 			<div class="card">
 				<div class="row">
 					<div class="col-md-3">
@@ -165,7 +155,7 @@
 			</div>
 		</div>
 	</div>
-	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/footer-bottom::footer"></div>
 	<div th:replace="fragments/main::scripts"></div>
 </body>
 </html>

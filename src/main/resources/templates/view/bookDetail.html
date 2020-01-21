@@ -7,30 +7,17 @@
 <title>Bookstore App</title>
 </head>
 <body class="profile-page sidebar-collapse">
-	<div th:replace="fragments/header::header"></div>
-	<div class="page-header clear-filter" filter-color="orange">
-		<div class="page-header-image" data-parallax="true"></div>
-		<div class="container">
-			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
-			<h1 class="h1-seo">Bookstore App</h1>
-			<h3>
-				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
-			</h3>
-		</div>
-	</div>
+	<div th:replace="fragments/header-dark::header"></div>
 	<div class="wrapper container">
-		<div class="section">
-			<div class="section-headline">
-				<h3>
-					<span th:text="${book.title}"></span>
-				</h3>
-			</div>
-			<hr class="hr-center" />
-		</div>
-		<div class="section-bookDetail">
+		<div class="section section-bookDetail">
 			<form th:action="@{/shoppingCart/addItem}" method="post">
 				<input hidden="hidden" th:field="*{book.id}" />
-				<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"> Back </a>
+				<div class="section row">
+					<div class="col-sm-12">
+						<h3 class="text-primary text-center" th:text="${book.title}"></h3>
+					</div>
+				</div>
+				<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"><i class="now-ui-icons arrows-1_minimal-left"></i> Back </a>
 				<div class="row">
 					<div class="col-sm-3">
 						<img th:if="${book.imageType == '.png'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/book/} + ${book.id} + ${book.imageType}" />
@@ -63,7 +50,7 @@
 											</div>
 											<div class="col-sm-6">
 												<h4 th:if="*{book.inStockNumber&gt;10}" style="color:green;">In Stock</h4>
-												<h4 th:if="*{book.inStockNumber&lt;10}" style="color:green;">Only <span th:text="${book.inStockNumber}"> in Stock</span></h4>
+												<h4 th:if="*{book.inStockNumber&lt;10}" style="color:green;">Only <span th:text="${book.inStockNumber}"></span> in Stock</h4>
 												<h4 th:if="*{book.inStockNumber==0}" style="color:darkred;">Unavailable</h4>
 												<button type="submit" class="btn btn-primary btn-round">Add to Cart</button>
 											</div>

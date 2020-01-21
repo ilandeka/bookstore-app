@@ -7,27 +7,17 @@
 <title>Bookstore App</title>
 </head>
 <body class="profile-page sidebar-collapse">
-	<div th:replace="fragments/header::header"></div>
-	<div class="page-header clear-filter" filter-color="orange">
-		<div class="page-header-image" data-parallax="true"></div>
-		<div class="container">
-			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
-			<h1 class="h1-seo">Bookstore App</h1>
-			<h3>
-				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
-			</h3>
-		</div>
-	</div>
+	<div th:replace="fragments/header-dark::header"></div>
 	<div class="wrapper container">
-		<div class="section">
-			<div class="section-headline">
-				<h3>
-					<span th:text="${user} ? ${#strings.toUpperCase(user.username)} : 'All Books'"></span>
-				</h3>
+		<div class="section section-bookshelf">
+			<div class="section">
+				<div class="section-headline">
+					<h3>
+						<span th:text="${user} ? ${#strings.toUpperCase(user.username)} : 'All Books'"></span>
+					</h3>
+				</div>
+				<hr class="hr-center" />
 			</div>
-			<hr class="hr-center" />
-		</div>
-		<div class="section-bookshelf">
 			<div th:if="${emptyList}">
 				<h5>Oops, no result found! Try, again.</h5>
 			</div>

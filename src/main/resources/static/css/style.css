@@ -19,8 +19,6 @@
 /* Classes */
 .footer {
 	padding: 50px 0px 50px 0px;
-	margin-top: 160px;
-	height: 200px;
 }
 
 .section-bookDetail, .section-bookshelf {
@@ -42,10 +40,6 @@
 .section-bookDetail img {
 	height: 21rem;
 	width: 16rem;
-}
-
-.cart-item-book {
-	width: 40%;
 }
 
 .page-header-image {
