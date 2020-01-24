@@ -19,6 +19,7 @@
 /* Classes */
 .footer {
 	padding: 50px 0px 50px 0px;
+	height: 350px;
 }
 
 .section-bookDetail, .section-bookshelf {
@@ -93,6 +94,10 @@
 }
 
 .section-settings .card {
+	min-height: 400px;
+}
+
+.section-profile .card {
 	min-height: 400px;
 }
 
