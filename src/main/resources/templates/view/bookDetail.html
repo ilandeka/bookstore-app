@@ -34,6 +34,20 @@
 						<img th:if="${book.imageType == '.jpg'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/book/default} + ${book.imageType}" />
 					</div>
 					<div class="col-sm-9">
+						<div th:if="${addBookSuccess}" class="alert alert-success" role="alert">
+							<div class="container">
+								<div class="alert-icon">
+									<i class="fa fa-check" aria-hidden="true" style="color:forestgreen;"></i>
+								</div>
+								<strong>Added to cart</strong>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">
+	                					<i class="now-ui-icons ui-1_simple-remove"></i>
+	              					</span>
+								</button>
+							</div>
+						</div>
+    					<h3><span th:if="${notEnoughStock}" style="color:red;">Oops, only <span th:text="${book.inStockNumber}"></span> In Stock.</span></h3>
 						<div class="row">
 							<div class="col-sm-5">
 								<p><strong>Author: </strong><span th:text="${book.author}"></span></p>
