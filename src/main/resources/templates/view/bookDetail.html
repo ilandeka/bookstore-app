@@ -22,10 +22,13 @@
 		<div class="section-bookDetail">
 			<form th:action="@{/shoppingCart/addItem}" method="post">
 				<input hidden="hidden" th:field="*{book.id}" />
-				<div class="section row">
-					<div class="col-sm-12">
-						<h3 class="text-primary text-center" th:text="${book.title}"></h3>
+				<div class="section">
+					<div class="section-headline">
+						<h3>
+							<span th:text="${book.title}"></span>
+						</h3>
 					</div>
+					<hr class="hr-center" />
 				</div>
 				<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"><i class="now-ui-icons arrows-1_minimal-left"></i> Back </a>
 				<div class="row">

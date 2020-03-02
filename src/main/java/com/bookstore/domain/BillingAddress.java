@@ -18,7 +18,7 @@ public class BillingAddress {
   private String billingAddressCity;
   private String billingAddressState;
   private String billingAddressCountry;
-  private String billingAddressZipcode;
+  private String billingAddressZipCode;
 
   @OneToOne
   private Order order;
@@ -79,12 +79,12 @@ public class BillingAddress {
     this.billingAddressCountry = billingAddressCountry;
   }
 
-  public String getBillingAddressZipcode() {
-    return billingAddressZipcode;
+  public String getBillingAddressZipCode() {
+    return billingAddressZipCode;
   }
 
-  public void setBillingAddressZipcode(String billingAddressZipcode) {
-    this.billingAddressZipcode = billingAddressZipcode;
+  public void setBillingAddressZipCode(String billingAddressZipCode) {
+    this.billingAddressZipCode = billingAddressZipCode;
   }
 
   public Order getOrder() {

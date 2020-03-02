@@ -70,4 +70,15 @@ public class CartItemServiceImplementation implements CartItemService {
     return cartItem;
   }
 
+  @Override
+  public CartItem findById(Long id) {
+    return cartItemRepository.findOne(id);
+  }
+
+  @Override
+  public void removeCartItem(CartItem cartItem) {
+    bookToCartItemRepository.deleteByCartItem(cartItem);
+    cartItemRepository.delete(cartItem);
+  }
+
 }

@@ -57,10 +57,10 @@
 						<div class="col-sm-5">
 							<span class="center-block">
 								<a th:href="@{/bookDetail?id=} + ${cartItem.id}"><h4 th:text="${cartItem.book.title}"></h4></a>
-								<p th:if="${cartItem.book.inStockNumber &gt; 10}" style="color:green;">In Stock</p>
-								<p th:if="${cartItem.book.inStockNumber &lt; 10 and cartItem.book.inStockNumber &gt; 0}" style="color:green;">Only
-								<span th:text="${cartItem.book.inStockNumber}"></span> in Stock</p>
-								<p th:if="${cartItem.book.inStockNumber == 0}" style="color:red;">Product Unavailable</p>
+								<p th:if="${cartItem.book.inStockNumber &gt; 10}"><h6 style="color:green;">In Stock</h6></p>
+								<p th:if="${cartItem.book.inStockNumber &lt; 10 and cartItem.book.inStockNumber &gt; 0}"><h6 style="color:green;">Only
+								<span th:text="${cartItem.book.inStockNumber}"></span> in Stock</h6></p>
+								<p th:if="${cartItem.book.inStockNumber == 0}"><h6 style="color:red;">Product Unavailable</h6></p>
 							</span>
 						</div>
 						<div class="col-sm-2">
@@ -71,8 +71,8 @@
 							<input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.book.inStockNumber == 0}" class="form-control cartItemQty" th:value="${cartItem.qty}" />
 							<button style="display:none;" th:id="'update-item-' + ${cartItem.id}" type="submit" class="btn btn-warning btn-sm">Update</button>
 						</div>
-						<div class="col-sm-1">
-							<a class="btn btn-danger" th:href="@{/shoppingCart/removeItem?id=} + ${cartItem.id}" style="margin:auto;"><i class="fas fa-trash-alt"></i></a>
+						<div class="col-sm-1 my-auto">
+							<a class="btn btn-danger" th:href="@{/shoppingCart/removeItem?id=} + ${cartItem.id}"><i class="fas fa-trash-alt"></i></a>
 						</div>
 					</div>
 				</form>
