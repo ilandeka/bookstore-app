@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="en">
+<head th:replace="fragments/main::head">
+<title>Royale League</title>
+</head>
+<body class="profile-page sidebar-collapse">
+	<div th:replace="fragments/header-dark::header"></div>
+		<div class="page-header clear-filter" filter-color="orange">
+		<div class="page-header-image" data-parallax="true"></div>
+		<div class="container">
+			<img src="/img/bookstore-logo.png" class="book-logo" alt="" />
+			<h1 class="h1-seo">Royale League</h1>
+			<h3>
+				A beautiful Bookstore only for You <i class="fas fa-heart"></i>.
+			</h3>
+		</div>
+	</div>
+	<div class="wrapper container">
+		<div class="section-tournamentDetail">
+			<form th:action="@{/shoppingCart/addItem}" method="post">
+				<input hidden="hidden" th:field="*{book.id}" />
+				<div class="section">
+					<div class="section-headline">
+						<h3>
+							<span th:text="${tournament.title}"></span>
+						</h3>
+					</div>
+					<hr class="hr-center" />
+				</div>
+				<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"><i class="now-ui-icons arrows-1_minimal-left"></i> Back </a>
+				<div class="row">
+					<div class="col-sm-3">
+						<img th:if="${tournament.imageType == '.png'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/tournament/} + ${book.id} + ${tournament.imageType}" />
+						<img th:if="${tournament.imageType == '.jpg'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/tournament/default} + ${tournament.imageType}" />
+					</div>
+					<div class="col-sm-9">
+						<div th:if="${addBookSuccess}" class="alert alert-success" role="alert">
+							<div class="container">
+								<div class="alert-icon">
+									<i class="fa fa-check" aria-hidden="true" style="color:forestgreen;"></i>
+								</div>
+								<strong>Added to cart</strong>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">
+	                					<i class="now-ui-icons ui-1_simple-remove"></i>
+	              					</span>
+								</button>
+							</div>
+						</div>
+    					<h3><span th:if="${notEnoughStock}" style="color:red;">Oops, only <span th:text="${tournament.inStockNumber}"></span> available</span></h3>
+						<div class="row">
+							<div class="col-sm-5">
+								<p><strong>Author: </strong><span th:text="${book.author}"></span></p>
+								<p><strong>Publisher: </strong><span th:text="${book.publisher}"></span></p>
+								<p><strong>Publication Date: </strong><span th:text="${book.publicationDate}"></span></p>
+								<p><strong>Language: </strong><span th:text="${book.language}"></span></p>
+								<p><strong>Category: </strong><span th:text="${book.category}"></span></p>
+								<p><strong><span th:text="${book.format}"></span>: </strong><span th:text="${book.numberOfPages}"></span> pages</p>
+								<p><strong>ISBN: </strong><span th:text="${book.isbn}"></span></p>
+								<p><strong>Shipping Weight: </strong><span th:text="${book.shippingWeight}"></span> grams</p>
+							</div>
+							<div class="col-sm-7">
+								<div class="pannel pannel-default" style="border:5px solid gray; padding: 10px;">
+									<div class="pannel-body">
+										<div class="row">
+											<div class="col-sm-6">
+												<h5><strong>Our Price: </strong><span style="color:#db3208;">$<span th:text="${book.ourPrice}"></span></span></h5>
+												<p><strong>List Price: </strong><span style="text-decoration: line-through">$<span th:text="${book.listPrice}"></span></span></p>
+												<p><strong>You Save: </strong>$<span th:text="${#numbers.formatDecimal((tournament.listPrice - tournament.ourPrice), 0, 'COMMA', 2, 'POINT')}"></span></p>
+												<span>Qty: </span>
+												<select name="qty">
+													<option th:each="qty: ${qtyList}" th:value="${qty}" th:text="${qty}"></option>
+												</select>
+											</div>
+											<div class="col-sm-6">
+												<h4 th:if="*{tournament.inStockNumber&gt;10}" style="color:green;">Available</h4>
+												<h4 th:if="*{tournament.inStockNumber&lt;10}" style="color:green;">Only <span th:text="${book.inStockNumber}"></span> left</h4>
+												<h4 th:if="*{tournament.inStockNumber==0}" style="color:darkred;">Unavailable</h4>
+												<button type="submit" class="btn btn-primary btn-round">Add to Cart</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<p th:utext="${book.description}"></p>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/main::scripts"></div>
+</body>
+</html>

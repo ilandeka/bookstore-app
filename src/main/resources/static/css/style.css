@@ -1,6 +1,6 @@
 /* 
 	@author: Ivan Landeka
-	@description: Custom CSS file for Bookstore App 
+	@description: Custom CSS file for Royale League
 */
 
 /*** TEST 
@@ -15,15 +15,55 @@
 */
 
 /* Elements */
+body {
+	background-color: black;
+}
+
+h3 {
+	color: #e3aa0e;
+}
+
+.btn, .btn:hover {
+	background-color: black;
+}
 
 /* Classes */
+.clear-filter[filter-color="black"] {
+  background: background: rgba(0, 0, 0, 1);
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(90deg, background: rgba(0, 0, 0, 0.5), rgba(224, 23, 3, 0.6));
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(90deg, background: rgba(0, 0, 0, 0.5), rgba(224, 23, 3, 0.6));
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(90deg, background: rgba(0, 0, 0, 0.5), rgba(224, 23, 3, 0.6));
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(0deg, background: rgba(0, 0, 0, 0.5), rgba(224, 23, 3, 0.6));
+  /* Standard syntax */
+}
+
+.section {
+	background-color: black;
+}
+
+.section-headline span {
+	color: #e0aa3e;
+	font-size: 2em;
+	font-weight: bold;
+	padding: 5px 25px;
+}
+
 .footer {
+	background-color: black;
 	padding: 50px 0px 50px 0px;
 	height: 350px;
 }
 
-.section-bookDetail, .section-bookshelf {
+.section-tournamentDetail, .section-tournaments {
 	padding-bottom: 50px;
+}
+
+.navbar {
+	background-color: black;
 }
 
 .navbar-nav .form-control:focus {
@@ -31,43 +71,37 @@
 }
 
 .navbar-nav .form-control::placeholder {
-	color: white;
+	/* addressing the search placeholder color */
 }
 
-.section-booksale {
-	margin-bottom: -70px;
-}
-
-.section-bookDetail img {
+.section-tournamentDetail img {
 	height: 21rem;
 	width: 16rem;
 }
 
 .page-header-image {
-	background-image: url('/img/library.jpg');
+	background-image: url('/img/wz.jpg');
 }
 
 .icon {
+	color: #e0aa3e;
 	position: absolute;
 	top: 70%;
 }
 
 .icon a:hover i {
-	color: #f96332;
-}
-
-.book-logo {
-	height: 30vh;
-}
-
-.section-headline {
 	color: white;
-	text-align: center;
 }
 
-.section-headline span {
-	background-color: #f96332;
-	padding: 5px 25px;
+.icon-logo {
+	width: 15%;
+	height: 15%;
+}
+
+.section-how .card {
+	/* min-height: 350px; */
+	color: white;
+	background-color: transparent;
 }
 
 .hr-center {
@@ -76,6 +110,11 @@
 
 .blockquote {
 	margin-bottom: 0px;
+}
+
+.photo-container {
+	border: #e0aa3e solid 5px; 
+	border-radius: 50%;
 }
 
 /*** Make rows equal heights */
@@ -107,22 +146,7 @@
 }
 
 /* IDs */
-#sale-books .carousel-item img {
-	width: 100%;
-	height: 41vh;
-}
-
-#featured-books .carousel-item img {
-	margin: 0 auto;
-	padding: 5px;
-}
-
-#featured-books .carousel-inner {
-	background-color: #f96332;
-	border-radius: 0;
-}
-
-#bookList img {
+#tournamentList img {
 	height: 22rem;
 	width: 15rem;
 }

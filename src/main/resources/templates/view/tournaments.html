@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="en">
+<head th:replace="fragments/main::head">
+<title>Royale League</title>
+</head>
+<body class="profile-page sidebar-collapse">
+	<div th:replace="fragments/header-dark::header"></div>
+	<div class="wrapper container">
+		<div class="section section-tournaments">
+			<div class="section">
+				<div class="section-headline">
+					<h3>
+						<span th:text="${user} ? ${#strings.toUpperCase(user.username)} : 'All Tournaments'"></span>
+					</h3>
+				</div>
+				<hr class="hr-center" />
+			</div>
+			<div th:if="${emptyList}">
+				<h5>Oops, no result found! Try, again.</h5>
+			</div>
+			<div class="row">
+				<table class="table table-responsive-sm table-hover" border="0" id="tournamentList">
+					<tbody>
+						<tr class="tournament-item" data-th-each="tournament : ${tournamentList}">
+							<td><div th:if="${tournament != null}">
+									<div class="row">
+										<div class="col-sm-3 text-center">
+											<a th:href="@{/tournamentDetail?id=} + ${tournament.id}"><img th:if="${tournament.imageType == '.png'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/tournament/} + ${tournament.id} + ${tournament.imageType}" />
+											<img th:if="${tournament.imageType == '.jpg'}" class="img-responsive shelf-book" th:src="#{adminPath} + @{/img/tournament/default} + ${tournament.imageType}" /></a>
+										</div>
+										<div class="col-sm-9">
+											<a th:href="@{/tournamentDetail?id=} + ${tournament.id}"><h4 th:text="${tournament.title}"></h4></a>
+											<span th:text="${tournament.tournamentDate}"></span>
+											<br/>
+											<span th:text="${tournament.startTime}"></span>
+											<br/>
+											<a th:href="@{/tournamentDetail?id=} + ${tournament.id}"><span th:text="${#strings.capitalize(tournament.mode)}"></span></a>
+											Best of <span th:text="${tournament.scoring}"></span> games
+											<br/>
+											<a th:href="@{/tournamentDetail?id=} + ${tournament.id}"><span style="font-size:x-large;color:#db3208;">$
+												<span th:text="${#numbers.formatDecimal(tournament.entryFee, 0, 'COMMA', 2, 'POINT')}"></span> Prize
+											</span></a>
+											<span style="text-decoration: line-through;">$
+												<span th:text="${#numbers.formatDecimal(tournament.entryFee, 0, 'COMMA', 2, 'POINT')}"></span> Per Player
+											</span>
+											<!-- <p th:utext="${#strings.abbreviate(tournament.description, 500)}"></p> -->
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr/>
+		</div>
+	</div>
+	<div th:replace="fragments/footer::footer"></div>
+	<div th:replace="fragments/main::scripts"></div>
+</body>
+</html>

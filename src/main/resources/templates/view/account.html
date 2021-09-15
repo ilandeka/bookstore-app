@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
 <head th:replace="fragments/main::head">
-<title>Bookstore App</title>
+	<title>Royale-League</title>
 </head>
 <body class="profile-page sidebar-collapse">
 	<div th:replace="fragments/header-dark::header"></div>
@@ -22,9 +22,6 @@
 						<div class="card-header">
 							<ul class="nav nav-tabs nav-tabs-primary flex-column"
 								role="tablist">
-								<li class="nav-item"><a class="nav-link" data-toggle="tab"
-									href="#home" role="tab"> <i class="fas fa-home"></i> Home
-								</a></li>
 								<li class="nav-item"><a class="nav-link" data-toggle="tab"
 									href="#create" role="tab"
 									th:classappend="${classActiveNewAccount}? 'active'"> <i
@@ -47,16 +44,6 @@
 						<div class="card-body">
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane" id="home" role="tabpanel">
-									<div class="text-center">
-										<h2 class="title">User Account</h2>
-										<h5 class="description">Here you can create a new Account
-											by clicking on the Create Account tab or Login by clicking on
-											the Login tab. If you ever forget your username or password
-											you can click on the Forgot Password tab and type in your
-											Email address to reset your Account details.</h5>
-									</div>
-								</div>
 								<div class="tab-pane" id="create" role="tabpanel"
 									th:classappend="${classActiveNewAccount}? 'in active'">
 									<form th:action="@{/newUser}" method="post">

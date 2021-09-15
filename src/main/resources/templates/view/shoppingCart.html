@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	lang="en">
 <head th:replace="fragments/main::head">
-<title>Bookstore App</title>
+<title>Royale League</title>
 </head>
 <body class="profile-page sidebar-collapse">
 	<div th:replace="fragments/header-dark::header"></div>
@@ -20,10 +20,10 @@
 			</div>
 			<div class="row">
 					<div class="col-sm-6 text-left">
-						<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"><i class="fas fa-shopping-cart fa-lg"></i> Continue Shopping </a>
+						<a class="btn btn-primary btn-round" th:href="@{/bookshelf}"><i class="fas fa-shopping-cart fa-lg"></i>&nbsp;&nbsp; Continue Shopping </a>
 					</div>
 					<div class="col-sm-6 text-right">
-						<a class="btn btn-info btn-round" th:href="@{/checkout(id=${shoppingCart.id})}"> Check Out <i class="now-ui-icons arrows-1_minimal-right"></i></a>
+						<a class="btn btn-info btn-round" th:href="@{/checkout(id=${shoppingCart.id})}"> Check Out &nbsp;&nbsp;<i class="now-ui-icons arrows-1_minimal-right"></i></a>
 					</div>
 			</div>
 			<div class="row">
@@ -56,20 +56,20 @@
 						</div>
 						<div class="col-sm-5">
 							<span class="center-block">
-								<a th:href="@{/bookDetail?id=} + ${cartItem.id}"><h4 th:text="${cartItem.book.title}"></h4></a>
-								<p th:if="${cartItem.book.inStockNumber &gt; 10}"><h6 style="color:green;">In Stock</h6></p>
-								<p th:if="${cartItem.book.inStockNumber &lt; 10 and cartItem.book.inStockNumber &gt; 0}"><h6 style="color:green;">Only
-								<span th:text="${cartItem.book.inStockNumber}"></span> in Stock</h6></p>
-								<p th:if="${cartItem.book.inStockNumber == 0}"><h6 style="color:red;">Product Unavailable</h6></p>
+								<a th:href="@{/tournamentDetail?id=} + ${cartItem.id}"><h4 th:text="${cartItem.tournament.title}"></h4></a>
+								<p th:if="${cartItem.tournament.inStockNumber &gt; 10}"><h6 style="color:green;">Available</h6></p>
+								<p th:if="${cartItem.tournament.inStockNumber &lt; 10 and cartItem.tournament.inStockNumber &gt; 0}"><h6 style="color:green;">Only
+								<span th:text="${cartItem.tournament.inStockNumber}"></span> left</h6></p>
+								<p th:if="${cartItem.tournament.inStockNumber == 0}"><h6 style="color:red;">Unavailable</h6></p>
 							</span>
 						</div>
 						<div class="col-sm-2">
-							<h5 style="color:#db3208;font-size:large;">$ <span th:text="${cartItem.book.ourPrice}" th:style="${cartItem.book.inStockNumber} == 0 ? 'text-decoration: line-through' : ''"></span></h5>
+							<h5 style="color:#db3208;font-size:large;">$ <span th:text="${cartItem.tournament.ourPrice}" th:style="${cartItem.tournament.inStockNumber} == 0 ? 'text-decoration: line-through' : ''"></span></h5>
 						</div>
 						<div class="col-sm-2">
 							<input hidden="hidden" name="id" th:value="${cartItem.id}" />
-							<input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.book.inStockNumber == 0}" class="form-control cartItemQty" th:value="${cartItem.qty}" />
-							<button style="display:none;" th:id="'update-item-' + ${cartItem.id}" type="submit" class="btn btn-warning btn-sm">Update</button>
+							<input th:id="${cartItem.id}" th:name="qty" th:disabled="${cartItem.tournament.inStockNumber == 0}" class="form-control cartItemQty" th:value="${cartItem.qty}" />
+							<button style="display:none;" th:id="'update-item-' + ${cartItem.id}" type="submit" class="btn btn-primary btn-sm">Update</button>
 						</div>
 						<div class="col-sm-1 my-auto">
 							<a class="btn btn-danger" th:href="@{/shoppingCart/removeItem?id=} + ${cartItem.id}"><i class="fas fa-trash-alt"></i></a>
@@ -78,12 +78,12 @@
 				</form>
 			</div>
 			<hr/>
-				<div class="row">
-					<h4 class="col-sm-12 text-right">
-						<strong style="font-size:large;">Total Price (<span th:text="${#lists.size(cartItemList)}"></span> items):</strong>
-						<span style="color:#db3208;font-size:large;">$ <span th:text="${shoppingCart.grandTotal}"></span></span>
-					</h4>
-				</div>
+			<div class="row">
+				<h4 class="col-sm-12 text-right">
+					<strong style="font-size:large;">Total Price (<span th:text="${#lists.size(cartItemList)}"></span> items):</strong>
+					<span style="color:#db3208;font-size:large;"><h3>$ <span th:text="${shoppingCart.grandTotal}"></span></h3></span>
+				</h4>
+			</div>
 		</div>
 	</div>
 	<div th:replace="fragments/footer::footer"></div>
